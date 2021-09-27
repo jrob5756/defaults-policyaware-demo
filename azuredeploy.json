@@ -86,13 +86,9 @@
         "description": "App Service Plan Tier"
       }
     },
-    "appServicePlanHighAvailability": {
-      "type": "string",
-      "defaultValue": "Enabled",
-      "allowedValues": [
-        "Enabled",
-        "Disabled"
-      ],
+    "appServicePlanZoneRedundancy": {
+      "type": "bool",
+      "defaultValue": true,
       "metadata": {
         "description": "App Service Plan Zone Redundancy"
       }
@@ -142,7 +138,7 @@
         "Name": "[parameters('appServicePlanSku')]"
       },
       "properties": {
-        "zoneRedundant": "[parameters('appServicePlanHighAvailability')]",
+        "zoneRedundant": "[parameters('appServicePlanZoneRedundancy')]",
         "reserved": true
       }
     }
