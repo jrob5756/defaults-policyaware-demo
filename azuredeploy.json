@@ -61,67 +61,11 @@
       "metadata": {
         "description": "Container Registry Zone Redundancy"
       }
-    },
-    "appServicePlanTier": {
-      "type": "string",
-      "defaultValue": "Free",
-      "allowedValues": [
-        "Free",
-        "Shared",
-        "Basic",
-        "Standard",
-        "Premium",
-        "PremiumV2",
-        "PremiumV3"
-      ],
-      "metadata": {
-        "description": "App Service Plan Tier"
-      }
-    },
-    "appServicePlanSku": {
-      "type": "string",
-      "defaultValue": "B1",
-      "allowedValues": [
-        "B1",
-        "B2",
-        "B3",
-        "D1",
-        "F1",
-        "I1",
-        "I1v2",
-        "I2",
-        "I2v2",
-        "I3",
-        "I3v2",
-        "P1V2",
-        "P1V3",
-        "P2V2",
-        "P2V3",
-        "P3V2",
-        "P3V3",
-        "PC2",
-        "PC3",
-        "PC4",
-        "S1",
-        "S2",
-        "S3"
-      ],
-      "metadata": {
-        "description": "App Service Plan Tier"
-      }
-    },
-    "appServicePlanZoneRedundancy": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "App Service Plan Zone Redundancy"
-      }
     }
   },
   "variables": {
     "storageAccountName": "[concat('store', uniquestring(resourceGroup().id))]",
     "postgresName": "[concat('postgres', uniquestring(resourceGroup().id))]",
-    "aspName": "[concat('asp', uniquestring(resourceGroup().id))]",
     "crName": "[concat('asp', uniquestring(resourceGroup().id))]"
   },
   "resources": [
@@ -161,21 +105,6 @@
       },
       "properties": {
         "zoneRedundancy": "[parameters('containerRegistryZoneRedundancy')]"
-      }
-    },
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2020-12-01",
-      "name": "[variables('aspName')]",
-      "location": "[resourceGroup().location]",
-      "kind": "linux",
-      "sku": {
-        "Tier": "[parameters('appServicePlanTier')]",
-        "Name": "[parameters('appServicePlanSku')]"
-      },
-      "properties": {
-        "zoneRedundant": "[parameters('appServicePlanZoneRedundancy')]",
-        "reserved": true
       }
     }
   ],
