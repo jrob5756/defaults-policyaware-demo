@@ -11,7 +11,7 @@ This template will create the following resources:
 
 - [Storage Account](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview)
 - [PostgreSql Database](https://docs.microsoft.com/en-us/azure/postgresql/overview)
-- [App Service Plan](https://docs.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+- [Container Registry](https://docs.microsoft.com/en-us/azure/container-registry/)
 
 
 If you're new to the template development, see:
