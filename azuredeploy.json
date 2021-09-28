@@ -38,6 +38,30 @@
         "description": "PostgreSql High Availability"
       }
     },
+    "containerRegistrySku": {
+      "type": "string",
+      "defaultValue": "Basic",
+      "allowedValues": [
+        "Basic",
+        "Classic",
+        "Premium",
+        "Standard"
+      ],
+      "metadata": {
+        "description": "Container Registry Sku"
+      }
+    },
+    "containerRegistryZoneRedundancy": {
+      "type": "string",
+      "defaultValue": "Disabled",
+      "allowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "metadata": {
+        "description": "Container Registry Zone Redundancy"
+      }
+    },
     "appServicePlanTier": {
       "type": "string",
       "defaultValue": "Free",
@@ -97,7 +121,8 @@
   "variables": {
     "storageAccountName": "[concat('store', uniquestring(resourceGroup().id))]",
     "postgresName": "[concat('postgres', uniquestring(resourceGroup().id))]",
-    "aspName": "[concat('asp', uniquestring(resourceGroup().id))]"
+    "aspName": "[concat('asp', uniquestring(resourceGroup().id))]",
+    "crName": "[concat('asp', uniquestring(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -126,6 +151,17 @@
       },
       "tags": {},
       "dependsOn": []
+    },
+    {
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2020-11-01-preview",
+      "name": "[variables('crName')]",
+      "sku": {
+        "name": "[parameters('containerRegistrySku')]"
+      },
+      "properties": {
+        "zoneRedundancy": "[parameters('containerRegistryZoneRedundancy')]"
+      }
     },
     {
       "type": "Microsoft.Web/serverfarms",
